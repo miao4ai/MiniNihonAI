@@ -139,5 +139,5 @@ Modules used:
 
 ## License
 
-MIT License (c) 2025 Miao Jiang Kaggle Win Inc.
+MIT License (c) 2025 Miao Jiang.
 
