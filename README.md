@@ -1,27 +1,26 @@
 # MiniNihonAI
 
-> Lightweight AI Infrastructure for Japanese-Language Applications
+> Lightweight AI Infrastructure for Japanese-Language Applications, Built for Extensible Multimodal Agents
 
 ---
 
 ## Overview
 
-**MiniNihonAI** is a lightweight, modular AI infrastructure built to support Japanese-language AI applications, with features optimized for local deployment (e.g., RTX 4090) and optional cloud extensions. This repo focuses solely on the infrastructure layer, and is designed to serve as a backend engine for applications such as semantic search, tourism assistants, RAG systems, and multimodal chat.
+**MiniNihonAI** is a modular, lightweight AI infrastructure framework tailored for Japanese-language applications. It is optimized for local deployment (e.g., RTX 4090) and cloud elasticity, and serves as a robust backend engine for building retrieval-augmented generation (RAG) systems, multimodal assistants, and future autonomous agent applications.
 
-> Future apps (like **"Nihon Travel Buddy" / 日本貼心旅遊醬**) will utilize this infra to provide actual services and user interfaces.
+This repository focuses **solely on the Infra layer**—apps like tourism assistants or autonomous driving agents will be built *on top* of this infrastructure using its modular APIs.
 
 ---
 
 ## Core Features
 
-- ✅ Lightweight deployment on a single GPU (e.g., RTX 4090)
-- ✅ Support for Japanese LLMs (Phi-2, Mistral 7B, etc.)
-- ✅ Pluggable embedding models (SBERT, OpenCLIP)
+- ✅ Local-first deployment with optional cloud extensions
+- ✅ Japanese LLM support (Mistral 7B, Phi-2, Elyza-Japanese)
+- ✅ Embedding & RAG engine with FAISS/Qdrant
 - ✅ Optional multimodal processing (CLIP, BLIP2)
-- ✅ Vector DB integration (FAISS or Qdrant)
-- ✅ RAG pipeline with retriever abstraction
-- ✅ FastAPI-based RESTful API for downstream app consumption
-- ✅ Configurable cloud deployment scripts (AWS / Docker Compose)
+- ✅ Modular FastAPI endpoints (e.g., `/ask`, `/embed`, `/image_caption`)
+- ✅ PEFT-friendly architecture (LoRA/QLoRA compatible)
+- ✅ Extensible for downstream Agents: tourism bots, autonomous vehicle assistants, etc.
 
 ---
 
@@ -56,6 +55,9 @@ MiniNihonAI/
 │   ├── retriever.py           # Vector search logic
 │   └── rag_pipeline.py        # QA pipeline with generator
 │
+├── agent/                     # (Experimental) Agent logic
+│   └── intent_router.py       # Convert natural language into structured control commands
+│
 ├── ui/                        # (Optional) Gradio/Streamlit UI
 │   ├── gradio_ui.py
 │   └── streamlit_ui.py
@@ -78,25 +80,30 @@ MiniNihonAI/
 
 ---
 
-## Use Cases (Supported by Infra)
+## Use Cases Enabled by This Infra
 
-While this repo is not an app itself, it enables downstream applications such as:
-
-- 🗺️ **Tourism Assistants** – Japanese Q&A over local spots
-- 🖼️ **Multimodal Search** – Upload images and retrieve nearby locations
-- 💬 **RAG QA Bots** – Enhanced Q&A with document retrieval
-- 🈳 **Local Language Models** – Japanese GPT inference on edge
-
----
-
-## Future Integration Example
-
-A separate application, e.g. `nihon-travel-buddy`, will:
-- Call `MiniNihonAI` REST APIs for LLM inference and search
-- Provide a frontend (web, mobile, or chatbot)
-- Possibly trigger fine-tuning or retraining via this infra
+- 🗺️ **Tourism Agents** – Japanese Q&A over local spots, routes, food
+- 🖼️ **Multimodal Search** – Upload images and retrieve nearby location info
+- 💬 **RAG QA Bots** – Retrieval-augmented answering over structured or unstructured Japanese knowledge
+- 🈳 **On-Device LLM Inference** – Low-latency GPT-style response generation
+- 🚘 **Autonomous Driving Agents (Prototype)** – Natural language intent → driving task interpretation pipeline
 
 ---
+
+## Agent-Oriented Extensions
+
+This infra also supports building **autonomous or semi-autonomous agents**, such as:
+
+### 🧭 "Japanese Autonomous Driving Agent"
+> A prototype that interprets voice or text commands like “代々木公園まで連れてって” and:
+- Translates → extracts intent → queries embedded location docs
+- Returns planned route or task
+- Optionally connects to real/simulated vehicle SDKs
+
+Modules used:
+- `llm_loader.py`, `translator.py`, `vector_store/`
+- `agent/intent_router.py`
+- Future extensions: `planner.py`, `speech_interface.py`, `vehicle_api.py`
 
 ## Deployment Targets
 
@@ -108,5 +115,5 @@ A separate application, e.g. `nihon-travel-buddy`, will:
 
 ## License
 
-MIT License (c) 2025 Miao Jiang
+MIT License (c) 2025 Miao Jiang Kaggle Win Inc.
 
