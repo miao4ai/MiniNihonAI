@@ -1,0 +1,44 @@
+==========================================
+
+tourism_agent_config.yaml (PEFT only)
+
+Minimal config for PEFT training of Agent
+
+==========================================
+
+agent:
+name               : "nihon_tour_guide"
+task_type          : "rag-chat"
+language           : "ja"
+mode               : "training"
+
+train_data:
+source_dir         : "./data/tourism_corpus"
+format             : "jsonl"
+input_key          : "question"
+target_key         : "answer"
+val_split          : 0.1
+
+model:
+base_model         : "elyza/ELYZA-japanese-Llama-2-7b-instruct"
+tokenizer          : "elyza/ELYZA-japanese-Llama-2-7b-instruct"
+use_peft           : true
+peft_type          : "lora"
+lora_r             : 8
+lora_alpha         : 32
+lora_dropout       : 0.1
+
+training:
+batch_size         : 4
+learning_rate      : 3e-5
+num_epochs         : 5
+output_dir         : "./checkpoints/tour_guide_lora"
+
+hardware:
+device             : "cuda"
+use_fp16           : true
+
+logging:
+log_to_wandb       : true
+wandb_project      : "MiniNihonAI-TourGuide"
+wandb_run_name     : "tour_lora_v1"
