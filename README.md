@@ -56,7 +56,8 @@ MiniNihonAI/
 │   └── rag_pipeline.py        # QA pipeline with generator
 │
 ├── agent/                     # (Experimental) Agent logic
-│   └── intent_router.py       # Convert natural language into structured control commands
+│   ├── intent_router.py       # Convert natural language into structured control commands
+│   └── motion_planner.py      # Motion planning module for autonomous navigation
 │
 ├── ui/                        # (Optional) Gradio/Streamlit UI
 │   ├── gradio_ui.py
@@ -87,6 +88,7 @@ MiniNihonAI/
 - 💬 **RAG QA Bots** – Retrieval-augmented answering over structured or unstructured Japanese knowledge
 - 🈳 **On-Device LLM Inference** – Low-latency GPT-style response generation
 - 🚘 **Autonomous Driving Agents (Prototype)** – Natural language intent → driving task interpretation pipeline
+- 🛣️ **Motion Planning for Autonomous Agents** – Waypoint-based path planning and behavioral routing (WIP)
 
 ---
 
@@ -94,16 +96,38 @@ MiniNihonAI/
 
 This infra also supports building **autonomous or semi-autonomous agents**, such as:
 
+### 🧳 "Japanese Tourism Guide Agent"
+> A cultural and location-aware assistant that handles tourist queries like “推荐京都春天拍照的景点有哪些？” and:
+- Answers using location-tagged documents, embedding search, and optional image input
+- Recommends spots, routes, and real-time considerations like weather or crowding
+- Can power mobile apps, web guides, or LINE bots
+
 ### 🧭 "Japanese Autonomous Driving Agent"
 > A prototype that interprets voice or text commands like “代々木公園まで連れてって” and:
 - Translates → extracts intent → queries embedded location docs
 - Returns planned route or task
 - Optionally connects to real/simulated vehicle SDKs
 
+### 🤖 "Japanese-English Translation Agent"
+> A service agent capable of performing lightweight real-time or batch translation using a combination of LLMs, NLLB models, and a retrieval base.
+- Translates and rewrites based on user intent and tone
+- Can integrate with browser plugins or chat interfaces
+
+### 🍱 "Hotel Concierge Robot Agent"
+> A multimodal assistant that receives text or image inputs to:
+- Recommend nearby restaurants or services
+- Answer common questions about bookings or hotel rules
+- Generate suggested replies to Japanese-language guest queries
+
 Modules used:
 - `llm_loader.py`, `translator.py`, `vector_store/`
-- `agent/intent_router.py`
-- Future extensions: `planner.py`, `speech_interface.py`, `vehicle_api.py`
+- `agent/intent_router.py`, `agent/motion_planner.py`
+- Future extensions: `speech_interface.py`, `vehicle_api.py`, `task_manager.py`, `tts_engine.py`Future extensions: `speech_interface.py`, `vehicle_api.py`
+
+---
+
+
+---
 
 ## Deployment Targets
 
