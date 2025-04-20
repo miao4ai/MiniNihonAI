@@ -1,0 +1,39 @@
+=======
+
+MiniNihonAI - config.yaml
+
+Unified configuration for models,
+
+APIs, embeddings & vector DB
+
+======================================
+
+llm:
+model_name     : "elyza/ELYZA-japanese-Llama-2-7b-instruct"
+device         : "cuda"        # Options: 'cuda' or 'cpu'
+max_new_tokens : 256
+
+embedding:
+model_name     : "sentence-transformers/LaBSE"
+device         : "cuda"
+
+translator:
+model_name     : "facebook/nllb-200-distilled-600M"
+device         : "cuda"
+
+multimodal:
+clip_model     : "openai/clip-vit-base-patch16"
+blip_model     : "Salesforce/blip-image-captioning-base"
+device         : "cuda"
+
+vector_db:
+provider       : "faiss"       # Options: 'faiss' or 'qdrant'
+index_path     : "./data/index/"
+
+api:
+host           : "0.0.0.0"
+port           : 7860
+
+logging:
+level          : "info"
+log_file       : "logs/server.log"
