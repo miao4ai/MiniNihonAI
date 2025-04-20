@@ -1,0 +1,14 @@
+agents:
+  travel_assistant:
+    enabled: true
+    modules:
+      - llm
+      - rag
+    rag:
+      vector_store_type: faiss
+      top_k: 5
+      similarity_threshold: 0.75
+      embed_model: bge-small-ja
+      doc_path: "data/travel_knowledge.csv"
+    memory:
+      max_turns: 4

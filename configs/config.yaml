@@ -1,39 +1,30 @@
-=======
+agents:
+  car_assistant:
+    enabled: true
+    modules:
+      - llm
+      - multimodal
+      - speech
+      - rag
+    speech:
+      use_whisper: true
+      tts: vits-ja
+    vision:
+      object_detector: yolov8
+      image_caption: true
+    memory:
+      max_turns: 3
 
-MiniNihonAI - config.yaml
-
-Unified configuration for models,
-
-APIs, embeddings & vector DB
-
-======================================
-
-llm:
-model_name     : "elyza/ELYZA-japanese-Llama-2-7b-instruct"
-device         : "cuda"        # Options: 'cuda' or 'cpu'
-max_new_tokens : 256
-
-embedding:
-model_name     : "sentence-transformers/LaBSE"
-device         : "cuda"
-
-translator:
-model_name     : "facebook/nllb-200-distilled-600M"
-device         : "cuda"
-
-multimodal:
-clip_model     : "openai/clip-vit-base-patch16"
-blip_model     : "Salesforce/blip-image-captioning-base"
-device         : "cuda"
-
-vector_db:
-provider       : "faiss"       # Options: 'faiss' or 'qdrant'
-index_path     : "./data/index/"
-
-api:
-host           : "0.0.0.0"
-port           : 7860
-
-logging:
-level          : "info"
-log_file       : "logs/server.log"
+  translator:
+    enabled: true
+    modules:
+      - llm
+      - rag
+      - translator_tool
+    translator_tool:
+      primary: deepL
+      fallback: openai
+    rag:
+      glossary_path: "data/term_glossary.csv"
+    memory:
+      max_turns: 5
