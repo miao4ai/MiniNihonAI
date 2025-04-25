@@ -1,6 +1,6 @@
 # MiniNihonAI
 
-> Lightweight AI Infrastructure for Japanese-Language Applications, Built for Extensible Multimodal Agents
+> Lightweight AI Infrastructure for the Japanese-Language Applications, Built for Extensible Multimodal Agents
 
 ---
 
